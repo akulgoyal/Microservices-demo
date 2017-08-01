@@ -18,28 +18,28 @@ eureka:
 spring:
   profiles: subject
   application:
-    name: word-provider
+    name: subject
 
 ---
 spring:
   profiles: verb
   application:
-    name: word-provider
+    name: verb
 
 ---
 spring:
   profiles: article
   application:
-    name: word-provider
+    name: article
 
 ---
 spring:
   profiles: adjective
   application:
-    name: word-provider
+    name: adjective
 
 ---
 spring:
   profiles: noun
   application:
-    name: word-provider
+    name: noun
