@@ -1,0 +1,8 @@
+spring:
+  application:
+    name: sentence
+  cloud:
+    config:
+      uri: http://localhost:8001
+server:
+  port: 8020
