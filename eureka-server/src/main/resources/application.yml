@@ -1,0 +1,34 @@
+---
+spring:
+  application:
+    name: eureka-server
+  profiles: primary
+server:
+  port: 8010
+eureka:
+  instance:
+    hostname: eureka-primary
+#    statusPageUrlPath: ${management.contextPath}/info
+#    healthCheckUrlPath: ${management.contextPath}/health
+#    hostname: localhost
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+      defaultZone: http://eureka-secondary:8011/eureka/
+
+---
+spring:
+  application:
+    name: eureka-server
+  profiles: secondary
+server:
+  port: 8011
+eureka:
+  instance:
+    hostname: eureka-secondary
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+      defaultZone: http://eureka-primary:8010/eureka/
