@@ -1,14 +1,16 @@
 package com.akul.microservices.sentence.service;
 
+import com.akul.microservices.sentence.domain.Word;
+
 public interface WordService {
 
-    String getSubject();
+    Word getSubject();
 
-    String getVerb();
+    Word getVerb();
 
-    String getArticle();
+    Word getArticle();
 
-    String getAdjective();
+    Word getAdjective();
 
-    String getNoun();
+    Word getNoun();
 }

@@ -16,10 +16,10 @@ public class SentenceServiceImpl implements SentenceService {
     @Override
     public String buildSentence() {
         return String.format("%s %s %s %s %s",
-                wordService.getSubject(),
-                wordService.getVerb(),
-                wordService.getArticle(),
-                wordService.getAdjective(),
-                wordService.getNoun());
+                wordService.getSubject().getString(),
+                wordService.getVerb().getString(),
+                wordService.getArticle().getString(),
+                wordService.getAdjective().getString(),
+                wordService.getNoun().getString());
     }
 }

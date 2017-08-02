@@ -1,6 +1,7 @@
 package com.akul.microservices.sentence.service;
 
 import com.akul.microservices.sentence.dao.*;
+import com.akul.microservices.sentence.domain.Word;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,51 +27,51 @@ public class WordServiceImpl implements WordService {
 
     @Override
     @HystrixCommand(fallbackMethod = "getFallbackSubject")
-    public String getSubject() {
+    public Word getSubject() {
         return subjectClient.getWord();
     }
 
     @Override
     @HystrixCommand(fallbackMethod = "getFallbackVerb")
-    public String getVerb() {
+    public Word getVerb() {
         return verbClient.getWord();
     }
 
     @Override
     @HystrixCommand(fallbackMethod = "getFallbackArticle")
-    public String getArticle() {
+    public Word getArticle() {
         return articleClient.getWord();
     }
 
     @Override
     @HystrixCommand(fallbackMethod = "getFallbackAdjective")
-    public String getAdjective() {
+    public Word getAdjective() {
         return adjectiveClient.getWord();
     }
 
     @Override
     @HystrixCommand(fallbackMethod = "getFallbackNoun")
-    public String getNoun() {
+    public Word getNoun() {
         return nounClient.getWord();
     }
 
-    public String getFallbackSubject() {
-        return "someone";
+    public Word getFallbackSubject() {
+        return new Word("someone", Word.Role.subject);
     }
 
-    public String getFallbackAdjective() {
-        return "";
+    public Word getFallbackAdjective() {
+        return new Word("", Word.Role.adjective);
     }
 
-    public String getFallbackNoun() {
-        return "something";
+    public Word getFallbackNoun() {
+        return new Word("something", Word.Role.noun);
     }
 
-    public String getFallbackVerb() {
-        return "did";
+    public Word getFallbackVerb() {
+        return new Word("did", Word.Role.verb);
     }
 
-    public String getFallbackArticle() {
-        return "a";
+    public Word getFallbackArticle() {
+        return new Word("a", Word.Role.article);
     }
 }
