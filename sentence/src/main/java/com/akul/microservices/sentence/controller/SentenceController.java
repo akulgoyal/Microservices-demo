@@ -1,4 +1,4 @@
-package com.akul.microservices.sentence.Controller;
+package com.akul.microservices.sentence.controller;
 
 import com.akul.microservices.sentence.service.SentenceService;
 import org.springframework.beans.factory.annotation.Autowired;
