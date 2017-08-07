@@ -1,6 +1,8 @@
 package com.akul.microservices.sentence.controller;
 
 import com.akul.microservices.sentence.service.SentenceService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -9,6 +11,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class SentenceController {
 
+
+    private static Logger log = LoggerFactory.getLogger(SentenceController.class);
     /*@Autowired
     private DiscoveryClient client;*/
 
@@ -29,6 +33,7 @@ public class SentenceController {
                         + getWord("NOUN") + "."
                 ;*/
 
+        log.info("Started to create sentences");
         long startTime = System.currentTimeMillis();
 
         String output = "<h3>Some Sentences</h3><br/>" +
@@ -41,6 +46,7 @@ public class SentenceController {
 
         long endTime = System.currentTimeMillis();
 
+        log.info("Sentence completed");
         return output + "Elapsed time (ms): " + (endTime-startTime);
     }
 
