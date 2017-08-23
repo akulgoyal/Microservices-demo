@@ -3,6 +3,8 @@ package com.akul.microservices.sentence.service;
 import com.akul.microservices.sentence.domain.Sentence;
 import com.akul.microservices.sentence.domain.Word;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import rx.Observable;
 
@@ -11,6 +13,7 @@ import java.util.List;
 import java.util.concurrent.CountDownLatch;
 
 @Service
+//@CacheConfig(cacheNames = "sentence")
 public class SentenceServiceImpl implements SentenceService {
 
     private WordService wordService;
@@ -21,6 +24,7 @@ public class SentenceServiceImpl implements SentenceService {
     }
 
     @Override
+    //@Cacheable
     public String buildSentence() {
         /*return String.format("%s %s %s %s %s",
                 wordService.getSubject().getString(),

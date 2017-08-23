@@ -5,6 +5,8 @@ import com.akul.microservices.sentence.domain.Word;
 import com.akul.microservices.sentence.domain.Word.Role;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import rx.Observable;
 import rx.schedulers.Schedulers;
@@ -12,6 +14,7 @@ import rx.schedulers.Schedulers;
 import java.util.concurrent.Executor;
 
 @Service
+@CacheConfig(cacheNames = "words")
 public class WordServiceImpl implements WordService {
 
     private SubjectClient subjectClient;
@@ -64,6 +67,7 @@ public class WordServiceImpl implements WordService {
 
     @Override
     @HystrixCommand(fallbackMethod="getFallbackSubject")
+    //@Cacheable
     public Observable<Word> getSubject() {
         //	This 'reactive' observable is backed by a regular Java Callable, which can run in a different thread:
         return Observable.fromCallable(
@@ -88,18 +92,18 @@ public class WordServiceImpl implements WordService {
     }
 
     @Override
-    @HystrixCommand(fallbackMethod="getFallbackAdjective")
-    public Observable<Word> getAdjective() {
-        return Observable.fromCallable(
-                () ->  new Word (adjectiveClient.getWord().getWord(), Role.adjective)
-        ).subscribeOn(Schedulers.from(executor));
-    }
-
-    @Override
     @HystrixCommand(fallbackMethod="getFallbackNoun")
     public Observable<Word> getNoun() {
         return Observable.fromCallable(
                 () ->  new Word (nounClient.getWord().getWord(), Role.noun)
+        ).subscribeOn(Schedulers.from(executor));
+    }
+
+    @Override
+    @HystrixCommand(fallbackMethod="getFallbackAdjective")
+    public Observable<Word> getAdjective() {
+        return Observable.fromCallable(
+                () ->  new Word (adjectiveClient.getWord().getWord(), Role.adjective)
         ).subscribeOn(Schedulers.from(executor));
     }
 
