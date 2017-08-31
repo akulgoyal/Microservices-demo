@@ -7,7 +7,7 @@ eureka:
 ---
 spring:
   profiles: subject
-words: Yogendra,lulu
+words: I,You,He,She,It
 
 ---
 spring:
